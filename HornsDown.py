@@ -4,8 +4,9 @@ from google.cloud.vision import types
 from PIL import Image, ImageDraw
 import copy
 
-# A picture frame, aka a list of 4 vertices
-
+# Uses Google Vision API to detect Longhorns logos
+# path: the path to the image to analyze
+# returns: a 3d array frames[frame][vertex][coord val] that details the coordinates of the different Longhorn logos
 def detect_logos(path):
     """Detects logos in the file."""
     from google.cloud import vision
@@ -42,8 +43,7 @@ def detect_logos(path):
     return frames   # returns frames[frame][vertex][coord val]
 
 
-
-
+# Used for debugging purposes
 def printFrameCoords(frames):
     for frame in frames:
         for coord in frame:
@@ -51,6 +51,7 @@ def printFrameCoords(frames):
         print("=================================")
 
 
+# Used for debugging purposes
 def drawBoxes(path, frames):
     im = Image.open(path)
     draw = ImageDraw.Draw(im)
@@ -66,6 +67,8 @@ def drawBoxes(path, frames):
             # else:
             draw.line((lastCoord[0],lastCoord[1], thisCoord[0],thisCoord[1]), fill=(238, 250, 15))
             lastCoord = thisCoord
+
+        # Draw a line from the last vertex to the first to complete the box
         draw.line((lastCoord[0], lastCoord[1], firstCoord[0], firstCoord[1]), fill=(238, 250, 15))
 
 
@@ -74,6 +77,7 @@ def drawBoxes(path, frames):
     # input("Press enter to continue")
 
 
+# makes a copy of the image passed to it and flips the logos within the frames
 def flipLogos(path, frames):
     original_im = Image.open(path)
     copy_im = original_im.copy()
@@ -94,23 +98,13 @@ def flipLogos(path, frames):
 # main
 # ---------------------
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'HornsDown-15e67103eb9b.json'
-# client = vision.ImageAnnotatorClient()
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'putNameOfJsonFileHere.json'
+image_path = "test_images/test4.jfif"
 
-
-# frames = detect_logos("HornsDownTest.jpg")
-# print()
-# print("=================================")
-# print("=================================")
-# print("=================================")
-# print()
-# printFrameCoords(frames)
-# drawBoxes(frames)
-
-frames2 = detect_logos("test_images/test3.jpg")
+frames2 = detect_logos(image_path)
 if (len(frames2) != 0):
     # printFrameCoords(frames2)
     # drawBoxes("test3.jpg", frames2)
-    flipLogos("test_images/test3.jpg", frames2)
+    flipLogos(image_path, frames2)
 
 # ======================
