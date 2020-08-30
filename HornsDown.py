@@ -89,7 +89,7 @@ def flipLogos(path, frames):
         copy_frame = copy_frame.crop(box)  # crop the image to show just the box
         copy_frame = copy_frame.rotate(180)
         copy_im.paste(copy_frame, (frame[0][0], frame[0][1]))  # paste the rotated & cropped image, passing the top left corner
-    copy_im.show()
+    # copy_im.show()
     file_ext = path.split('.')[1]
     new_path = path.split('.')[0] + "_logos_flipped." + file_ext
     copy_im.save(new_path)
@@ -98,8 +98,11 @@ def flipLogos(path, frames):
 # main
 # ---------------------
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'putNameOfJsonFileHere.json'
-image_path = "test_images/test4.jfif"
+# *************************
+# UPDATE JSON NAME HERE
+# *************************
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'YOUR_JASON_NAME_HERE.json'
+image_path = "images/test5.jfif"
 
 frames2 = detect_logos(image_path)
 if (len(frames2) != 0):
