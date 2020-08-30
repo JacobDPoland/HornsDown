@@ -1,7 +1,7 @@
 # HornsDown
 
 About:
-If you do not know, one of the favorite hand gestures among students at Texas A&M University is the "Hook 'Em" hand gesture from the University of Texas at Austin, but upside down. This Aggie tradition was the inspiration for this little project, and I had fun making it.
+If you do not know, one of the favorite hand gestures among students at Texas A&M University is the "Hook 'Em" hand gesture from the University of Texas at Austin, but upside down. Students at A&M usually refer to this hand gesture as "Horns Down." This Aggie tradition was the inspiration for this little project, and I had fun making it.
 
 Dependencies:
 - Python 3
